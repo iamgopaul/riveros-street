@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
@@ -77,39 +76,12 @@ export default function MediaPage() {
 }
 
 function Embed({ item, src }: { item: MediaItem; src: string }) {
-  const { t } = useI18n();
   const ar = item.aspect ?? aspectClass(item.platform);
-  const [muted, setMuted] = useState(true);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-
-  // Self-hosted clips and the TikTok player both support mute control; IG/FB
-  // embeds don't expose a cross-origin API, so we hide the button for them.
-  const controllable = item.platform === "video" || item.platform === "tiktok";
-
-  // keep the native video element in sync with state
-  useEffect(() => {
-    if (item.platform === "video" && videoRef.current) videoRef.current.muted = muted;
-  }, [muted, item.platform]);
-
-  function toggleMute() {
-    const next = !muted;
-    setMuted(next);
-    if (item.platform === "tiktok") {
-      // TikTok Player v1 postMessage API
-      iframeRef.current?.contentWindow?.postMessage(
-        { type: next ? "mute" : "unMute", "x-tiktok-player": true },
-        "*"
-      );
-    }
-  }
-
   return (
     <div className="border border-border overflow-hidden bg-black">
       <div className={`relative w-full ${ar}`}>
         {item.platform === "video" ? (
           <video
-            ref={videoRef}
             src={src}
             className="absolute inset-0 h-full w-full object-cover"
             autoPlay
@@ -117,10 +89,10 @@ function Embed({ item, src }: { item: MediaItem; src: string }) {
             muted
             playsInline
             preload="metadata"
+            controls
           />
         ) : (
           <iframe
-            ref={iframeRef}
             src={src}
             title={`${item.platform} video`}
             className="absolute inset-0 h-full w-full"
@@ -129,28 +101,6 @@ function Embed({ item, src }: { item: MediaItem; src: string }) {
             allowFullScreen
             referrerPolicy="no-referrer-when-downgrade"
           />
-        )}
-
-        {controllable && (
-          <button
-            type="button"
-            onClick={toggleMute}
-            aria-label={muted ? t("media.unmute") : t("media.mute")}
-            aria-pressed={!muted}
-            className="absolute bottom-3 right-3 z-10 inline-flex items-center justify-center h-10 w-10 bg-background/70 backdrop-blur border border-border text-foreground hover:border-accent hover:text-accent transition-colors"
-          >
-            {muted ? (
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" className="w-5 h-5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M11 5 6 9H3v6h3l5 4V5z" />
-                <path d="m22 9-6 6M16 9l6 6" />
-              </svg>
-            ) : (
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" className="w-5 h-5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M11 5 6 9H3v6h3l5 4V5z" />
-                <path d="M16 8.5a5 5 0 0 1 0 7M19 6a9 9 0 0 1 0 12" />
-              </svg>
-            )}
-          </button>
         )}
       </div>
       <div className="px-4 py-3 text-[10px] uppercase tracking-[0.3em] text-foreground/40 border-t border-border">

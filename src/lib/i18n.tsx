@@ -259,8 +259,6 @@ const EN: Dict = {
   "media.title.b": "& served.",
   "media.lede": "Follow along for fresh plates, new drops, and the line out the window. Tag @riverosstreet and you might find yourself featured here.",
   "media.follow": "Follow the truck",
-  "media.unmute": "Unmute",
-  "media.mute": "Mute",
 
   // contact
   "contact.eyebrow": "Contact",
@@ -539,8 +537,6 @@ const ES: Dict = {
   "media.title.b": "y servido.",
   "media.lede": "Síguenos para ver platos recién hechos, nuevos drops y la fila en la ventana. Etiqueta @riverosstreet y podrías aparecer aquí.",
   "media.follow": "Sigue al camión",
-  "media.unmute": "Activar sonido",
-  "media.mute": "Silenciar",
 
   // contact
   "contact.eyebrow": "Contacto",
