@@ -26,7 +26,7 @@ export default function ShopHome() {
           <span className="watermark text-[26vw] leading-none pr-[2vw]">SS26</span>
         </div>
         <div className="relative max-w-7xl mx-auto px-6 pt-28 pb-20">
-          <div className="tick text-[11px] uppercase tracking-[0.4em] text-foreground/60 mb-10 float-up">
+          <div className="tick inline-flex text-[11px] uppercase tracking-[0.4em] text-foreground/70 mb-10 float-up bg-background/55 backdrop-blur-sm border border-border/60 px-4 py-2">
             <span className="font-mono text-accent">{t("shop.ss26")}</span>
             <span>{t("shop.volume")}</span>
           </div>
@@ -36,7 +36,7 @@ export default function ShopHome() {
             <span className="block gold-text spray">{t("shop.h1.c")}</span>
           </h1>
           <div className="mt-12 grid gap-10 md:grid-cols-[1fr_auto] md:items-end">
-            <p className="max-w-md text-foreground/70 text-lg leading-relaxed">{t("shop.lede")}</p>
+            <p className="max-w-md self-start text-foreground/80 text-lg leading-relaxed bg-background/55 backdrop-blur-sm border border-border/60 p-5">{t("shop.lede")}</p>
             <Link
               href="/products"
               className="group inline-flex items-center gap-3 px-8 h-14 bg-accent text-white font-mono uppercase tracking-widest text-sm hover:bg-accent-soft transition-colors"

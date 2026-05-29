@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { SectionHeader } from "@/components/SectionHeader";
+import { AwardBadge } from "@/components/AwardBadge";
 import { useI18n } from "@/lib/i18n";
 import { SITES, hostOf, withLang, PHONE_DISPLAY } from "@/lib/sites";
 import { HOURS } from "@/lib/hours";
@@ -27,21 +28,23 @@ export default function HubHome() {
             <span className="watermark text-[26vw] leading-none">850</span>
           </div>
 
+          {/* Restaurant Guru award — floats in the clear top-right of the hero */}
+          <AwardBadge className="absolute right-5 top-24 sm:right-8 md:top-32 z-10 w-20 sm:w-28 md:w-36 drop-shadow-[0_8px_24px_rgba(0,0,0,0.55)]" />
+
           <div className="relative max-w-7xl mx-auto px-6 w-full flex-1 flex flex-col justify-center py-16">
-            <div className="self-start max-w-3xl bg-background/55 backdrop-blur-md border border-border/60 p-7 sm:p-10">
-            <div className="tick text-[11px] uppercase tracking-[0.4em] text-foreground/60 mb-8 float-up">
+            <div className="tick inline-flex self-start text-[11px] uppercase tracking-[0.4em] text-foreground/70 mb-8 float-up bg-background/55 backdrop-blur-sm border border-border/60 px-4 py-2">
               <span className="font-mono text-accent">{t("hub.est")}</span>
               <span>{t("hub.oneAddress")}</span>
             </div>
 
             <h1 className="hero-stagger font-mono font-bold uppercase tracking-tight leading-[0.85] text-[clamp(3.5rem,13vw,10rem)]">
-              <span className="block hero-line">{t("hub.h1.a")}</span>
+              <span className="block hero-line-glow">{t("hub.h1.a")}</span>
               <span className="block gold-text hero-line-glow">{t("hub.h1.b")}</span>
               <span className="block cyan-text hero-line-glow">{t("hub.h1.c")}</span>
             </h1>
 
             <div className="mt-10 grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
-              <p className="max-w-md text-foreground/70 text-base sm:text-lg leading-relaxed">
+              <p className="max-w-md self-start text-foreground/80 text-base sm:text-lg leading-relaxed bg-background/55 backdrop-blur-sm border border-border/60 p-5">
                 {t("hub.lede")}
               </p>
               <div className="flex flex-wrap gap-4">
@@ -60,7 +63,6 @@ export default function HubHome() {
                   <span className="transition-transform group-hover:translate-x-1">→</span>
                 </Link>
               </div>
-            </div>
             </div>
           </div>
         </section>

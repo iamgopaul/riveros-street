@@ -1,6 +1,7 @@
 "use client";
 
 import { FullWordmark } from "./Logo";
+import { AwardBadge } from "./AwardBadge";
 import { useI18n } from "@/lib/i18n";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/sites";
 
@@ -10,11 +11,14 @@ export function Footer() {
     <footer className="border-t border-border mt-32">
       <div className="h-1 w-full sunset-bar" />
       <div className="max-w-7xl mx-auto px-6 py-16 grid gap-12 md:grid-cols-4">
-        <div className="md:col-span-2">
-          <FullWordmark className="text-sm" />
-          <p className="mt-4 text-foreground/60 max-w-sm text-sm leading-relaxed">
-            {t("footer.tagline")}
-          </p>
+        <div className="md:col-span-2 flex items-start justify-between gap-6">
+          <div>
+            <FullWordmark className="text-sm" />
+            <p className="mt-4 text-foreground/60 max-w-sm text-sm leading-relaxed">
+              {t("footer.tagline")}
+            </p>
+          </div>
+          <AwardBadge className="w-20 sm:w-24 shrink-0" />
         </div>
         <div>
           <h4 className="text-xs uppercase tracking-widest text-accent mb-4">{t("footer.visit")}</h4>

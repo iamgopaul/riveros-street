@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { REVIEWS, RATING, GOOGLE_REVIEWS_URL } from "@/lib/reviews";
 import { SectionHeader } from "@/components/SectionHeader";
+import { AwardBadge } from "@/components/AwardBadge";
 import { useI18n } from "@/lib/i18n";
 
 function Stars({ n }: { n: number }) {
@@ -22,15 +23,18 @@ export function Reviews() {
       <div className="max-w-7xl mx-auto px-6 py-28">
         <div className="flex items-end justify-between mb-12 gap-6 flex-wrap">
           <SectionHeader index="//" label={t("reviews.eyebrow")} title={t("reviews.title")} />
-          <div className="flex items-center gap-3">
-            <span className="font-mono text-4xl gold-text">{RATING.average.toFixed(1)}</span>
-            <div className="flex flex-col gap-1">
-              <Stars n={Math.round(RATING.average)} />
-              {RATING.count > 0 && (
-                <span className="text-xs uppercase tracking-[0.3em] text-foreground/45">
-                  {RATING.count} {t("reviews.count")}
-                </span>
-              )}
+          <div className="flex items-center gap-6">
+            <AwardBadge className="w-24 sm:w-28" />
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-4xl gold-text">{RATING.average.toFixed(1)}</span>
+              <div className="flex flex-col gap-1">
+                <Stars n={Math.round(RATING.average)} />
+                {RATING.count > 0 && (
+                  <span className="text-xs uppercase tracking-[0.3em] text-foreground/45">
+                    {RATING.count} {t("reviews.count")}
+                  </span>
+                )}
+              </div>
             </div>
           </div>
         </div>
