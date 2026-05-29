@@ -11,8 +11,7 @@
 export const GOOGLE_MAPS_URL =
   "https://www.google.com/maps/place/?q=place_id:&query=Rivero%27s+Street+Freeport+FL";
 
-export const GOOGLE_REVIEWS_URL =
-  "https://search.google.com/local/reviews?placeid=";
+export const GOOGLE_REVIEWS_URL = "https://share.google/2yCfHQ61NYwbv46aY";
 
 export type Review = {
   author: string;

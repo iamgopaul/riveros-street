@@ -28,9 +28,9 @@ export default function HubHome() {
             <span className="watermark text-[26vw] leading-none">850</span>
           </div>
 
-          {/* Restaurant Guru award — bottom-right on phones (clear of the nav),
-              top-right on larger screens. */}
-          <AwardBadge className="absolute z-10 drop-shadow-[0_8px_24px_rgba(0,0,0,0.55)] right-4 bottom-28 w-24 sm:right-8 sm:bottom-auto sm:top-28 sm:w-28 md:top-32 md:w-36" />
+          {/* Restaurant Guru award — corner seal on tablet/desktop. On phones
+              it sits in-flow under the CTAs instead (see below). */}
+          <AwardBadge className="hidden sm:block absolute z-10 drop-shadow-[0_8px_24px_rgba(0,0,0,0.55)] sm:right-8 sm:top-28 sm:w-28 md:top-32 md:w-36" />
 
           <div className="relative max-w-7xl mx-auto px-6 w-full flex-1 flex flex-col justify-center py-16">
             <div className="tick inline-flex self-start text-[11px] uppercase tracking-[0.4em] text-foreground/70 mb-8 float-up bg-background/55 backdrop-blur-sm border border-border/60 px-4 py-2">
@@ -65,6 +65,9 @@ export default function HubHome() {
                 </Link>
               </div>
             </div>
+
+            {/* Mobile-only award seal, in-flow under the CTAs */}
+            <AwardBadge className="sm:hidden mt-10 w-20 self-start drop-shadow-[0_8px_24px_rgba(0,0,0,0.55)]" />
           </div>
         </section>
 
