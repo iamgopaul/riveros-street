@@ -40,7 +40,11 @@ function signature(l: Omit<CartLine, "uid" | "qty">) {
   return `${l.itemId}#${mods}#${l.notes.trim().toLowerCase()}`;
 }
 
+/** Which storefront this cart belongs to (separate carts + copy). */
+export type CartSurface = "eat" | "shop";
+
 type Ctx = {
+  surface: CartSurface;
   lines: CartLine[];
   count: number;
   subtotal: number;
@@ -55,9 +59,15 @@ type Ctx = {
 };
 
 const CartContext = createContext<Ctx | null>(null);
-const STORAGE_KEY = "rs_cart_v1";
 
-export function CartProvider({ children }: { children: React.ReactNode }) {
+export function CartProvider({
+  surface = "eat",
+  children,
+}: {
+  surface?: CartSurface;
+  children: React.ReactNode;
+}) {
+  const storageKey = `rs_cart_${surface}_v1`;
   const [lines, setLines] = useState<CartLine[]>([]);
   const [open, setOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
@@ -65,23 +75,23 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   // Load once on mount.
   useEffect(() => {
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
+      const raw = localStorage.getItem(storageKey);
       if (raw) setLines(JSON.parse(raw));
     } catch {
       /* ignore corrupt storage */
     }
     setHydrated(true);
-  }, []);
+  }, [storageKey]);
 
   // Persist after hydration so we never clobber storage with the empty initial state.
   useEffect(() => {
     if (!hydrated) return;
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(lines));
+      localStorage.setItem(storageKey, JSON.stringify(lines));
     } catch {
       /* storage full / unavailable */
     }
-  }, [lines, hydrated]);
+  }, [lines, hydrated, storageKey]);
 
   const add = useCallback((line: Omit<CartLine, "uid" | "qty">, qty = 1) => {
     const sig = signature(line);
@@ -113,7 +123,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const count = useMemo(() => lines.reduce((n, l) => n + l.qty, 0), [lines]);
   const subtotal = useMemo(() => lines.reduce((s, l) => s + lineTotal(l), 0), [lines]);
 
-  const value: Ctx = { lines, count, subtotal, add, setQty, remove, clear, open, setOpen };
+  const value: Ctx = { surface, lines, count, subtotal, add, setQty, remove, clear, open, setOpen };
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
 

@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function EatLayout({ children }: { children: React.ReactNode }) {
   return (
-    <CartProvider>
+    <CartProvider surface="eat">
       <Nav variant="eat" />
       <main className="flex-1">{children}</main>
       <Footer />

@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Logo } from "./Logo";
 import { LanguageToggle } from "./LanguageToggle";
 import { EatNavActions } from "./EatNavActions";
+import { CartButton } from "./CartButton";
 import { useI18n } from "@/lib/i18n";
 import { navHref, surfaceBase } from "@/lib/sites";
 
@@ -65,7 +66,7 @@ export function Nav({ variant, transparent = false }: { variant: Variant; transp
       } ${
         floating
           ? "bg-transparent border-b border-transparent"
-          : "backdrop-blur-md bg-background/70 border-b border-border"
+          : "bg-background border-b border-border"
       }`}
     >
       {!floating && <div className="h-1 w-full hazard-thin" />}
@@ -73,13 +74,13 @@ export function Nav({ variant, transparent = false }: { variant: Variant; transp
       {/* ── MAIN ROW ─────────────────────────────────── */}
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
         <Logo href={surfaceBase(variant) || "/"} tone={floating ? "red" : "default"} />
-        <nav className="hidden md:flex items-center gap-6 lg:gap-8 text-xs lg:text-sm uppercase tracking-widest">
+        <nav className="hidden lg:flex items-center gap-6 lg:gap-8 text-xs lg:text-sm uppercase tracking-widest">
           {main.map((l) => (
             <a
               key={l.href}
               href={l.href}
               aria-current={l.active ? "page" : undefined}
-              className={`link-shimmer transition-colors ${
+              className={`link-shimmer whitespace-nowrap transition-colors ${
                 l.active ? "text-accent" : "text-foreground/80 hover:text-accent"
               }`}
             >
@@ -89,12 +90,13 @@ export function Nav({ variant, transparent = false }: { variant: Variant; transp
         </nav>
         <div className="flex items-center gap-3 sm:gap-4">
           {variant === "eat" && <EatNavActions />}
+          {variant === "shop" && <CartButton />}
           <LanguageToggle />
         </div>
       </div>
 
-      {/* ── MOBILE MAIN LINKS (every surface) ─────────── */}
-      <div className={`md:hidden ${floating ? "" : "border-t border-border bg-black/40"}`}>
+      {/* ── COMPACT MAIN LINKS (below lg) ─────────────── */}
+      <div className={`lg:hidden ${floating ? "" : "border-t border-border bg-black/40"}`}>
         <div className="max-w-7xl mx-auto px-6 h-11 flex items-center gap-7 text-xs uppercase tracking-widest overflow-x-auto">
           {main.map((l) => (
             <a

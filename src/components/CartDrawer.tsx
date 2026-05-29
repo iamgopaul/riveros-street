@@ -17,6 +17,7 @@ const PICKUP_OPTIONS: { key: string; label: { en: string; es: string } }[] = [
 ];
 
 function buildMessage(
+  surface: "eat" | "shop",
   lines: CartLine[],
   subtotal: number,
   lang: Lang,
@@ -34,9 +35,10 @@ function buildMessage(
       return s;
     })
     .join("\n");
-  let msg = `🛵 ${t("order.wa.header")}\n\n${body}\n\n${t("order.subtotal")}: ${money(subtotal)}`;
+  const header = surface === "shop" ? t("shop.wa.header") : t("order.wa.header");
+  let msg = `${surface === "shop" ? "🧢" : "🛵"} ${header}\n\n${body}\n\n${t("order.subtotal")}: ${money(subtotal)}`;
   msg += `\n${t("checkout.name")}: ${name}`;
-  msg += `\n${t("checkout.pickup")}: ${pickup}`;
+  if (pickup) msg += `\n${t("checkout.pickup")}: ${pickup}`;
   if (orderNotes.trim()) msg += `\n${t("order.notes")}: ${orderNotes.trim()}`;
   return msg;
 }
@@ -84,7 +86,8 @@ function LineRow({ line }: { line: CartLine }) {
 
 export function CartDrawer() {
   const { t, lang } = useI18n();
-  const { lines, count, subtotal, open, setOpen, clear } = useCart();
+  const { surface, lines, count, subtotal, open, setOpen, clear } = useCart();
+  const isShop = surface === "shop";
   const [step, setStep] = useState<Step>("cart");
   const [name, setName] = useState("");
   const [pickup, setPickup] = useState(PICKUP_OPTIONS[0].label[lang]);
@@ -99,7 +102,7 @@ export function CartDrawer() {
     qty: l.qty,
     modifiers: l.modifiers.map((m) => ({ groupKey: m.groupKey, labelEn: m.label.en })),
   }));
-  const orderNote = `${buildMessage(lines, subtotal, lang, name.trim() || "—", pickup, orderNotes, t)}\n${t("order.ref")}: ${payRef}`;
+  const orderNote = `${buildMessage(surface, lines, subtotal, lang, name.trim() || "—", isShop ? "" : pickup, orderNotes, t)}\n${t("order.ref")}: ${payRef}`;
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -116,7 +119,7 @@ export function CartDrawer() {
 
   function sendOrder() {
     const ref = "RS-" + String(Date.now()).slice(-5);
-    const msg = buildMessage(lines, subtotal, lang, name.trim() || "—", pickup, orderNotes, t);
+    const msg = buildMessage(surface, lines, subtotal, lang, name.trim() || "—", isShop ? "" : pickup, orderNotes, t);
     setOrderRef(ref);
     setPaid(false);
     window.open(whatsappOrderUrl(`${msg}\n${t("order.ref")}: ${ref}`), "_blank", "noopener");
@@ -157,7 +160,7 @@ export function CartDrawer() {
         <div className="h-1 w-full hazard-thin" />
         <div className="flex items-center justify-between px-6 h-16 border-b border-border shrink-0">
           <h2 className="font-mono font-bold uppercase tracking-widest text-sm">
-            {step === "cart" && t("cart.title")}
+            {step === "cart" && (isShop ? t("cart.titleShop") : t("cart.title"))}
             {step === "checkout" && t("checkout.title")}
             {step === "pay" && t("pay.title")}
             {step === "done" && t("checkout.done.title")}
@@ -183,7 +186,7 @@ export function CartDrawer() {
                     onClick={() => setOpen(false)}
                     className="mt-2 text-accent uppercase tracking-widest text-xs link-shimmer"
                   >
-                    {t("cart.browse")} →
+                    {isShop ? t("cart.browseShop") : t("cart.browse")} →
                   </button>
                 </div>
               ) : (
@@ -196,7 +199,7 @@ export function CartDrawer() {
                   <span className="text-foreground/60">{t("order.subtotal")}</span>
                   <span className="text-accent text-lg">{money(subtotal)}</span>
                 </div>
-                <p className="text-[11px] text-foreground/40 leading-relaxed">{t("checkout.payNote")}</p>
+                <p className="text-[11px] text-foreground/40 leading-relaxed">{isShop ? t("shop.payNote") : t("checkout.payNote")}</p>
                 <button
                   onClick={() => setStep("checkout")}
                   className="w-full h-14 bg-accent text-white font-mono uppercase tracking-widest text-xs hover:bg-accent-soft transition-colors"
@@ -221,26 +224,31 @@ export function CartDrawer() {
                   className="mt-3 w-full bg-black/30 border border-border px-4 h-12 text-sm focus:border-accent focus:outline-none"
                 />
               </div>
-              <div>
-                <span className="font-mono uppercase text-xs tracking-[0.3em] text-accent">{t("checkout.pickup")}</span>
-                <div className="mt-3 grid grid-cols-2 gap-2">
-                  {PICKUP_OPTIONS.map((o) => {
-                    const label = o.label[lang];
-                    const sel = pickup === label;
-                    return (
-                      <button
-                        key={o.key}
-                        onClick={() => setPickup(label)}
-                        className={`h-11 border text-xs uppercase tracking-widest transition-colors ${
-                          sel ? "border-accent bg-accent/10 text-foreground" : "border-border text-foreground/60 hover:border-foreground/40"
-                        }`}
-                      >
-                        {label}
-                      </button>
-                    );
-                  })}
+              {!isShop && (
+                <div>
+                  <span className="font-mono uppercase text-xs tracking-[0.3em] text-accent">{t("checkout.pickup")}</span>
+                  <div className="mt-3 grid grid-cols-2 gap-2">
+                    {PICKUP_OPTIONS.map((o) => {
+                      const label = o.label[lang];
+                      const sel = pickup === label;
+                      return (
+                        <button
+                          key={o.key}
+                          onClick={() => setPickup(label)}
+                          className={`h-11 border text-xs uppercase tracking-widest transition-colors ${
+                            sel ? "border-accent bg-accent/10 text-foreground" : "border-border text-foreground/60 hover:border-foreground/40"
+                          }`}
+                        >
+                          {label}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
+              )}
+              {isShop && (
+                <p className="text-[11px] text-foreground/45 leading-relaxed">{t("shop.checkout.note")}</p>
+              )}
               <div>
                 <label className="font-mono uppercase text-xs tracking-[0.3em] text-accent">{t("order.notes")}</label>
                 <textarea

@@ -163,9 +163,15 @@ const EN: Dict = {
 
   // cart + checkout
   "cart.title": "Your Order",
+  "cart.titleShop": "Your Bag",
   "cart.empty": "Your cart is empty.",
   "cart.browse": "Browse the menu",
+  "cart.browseShop": "Browse the shop",
   "cart.checkout": "Checkout",
+  "order.qty": "Quantity",
+  "shop.wa.header": "Rivero's Street — Shop order",
+  "shop.payNote": "Pay now by card, or reserve on WhatsApp and pay on pickup.",
+  "shop.checkout.note": "We'll confirm sizes and arrange shipping or window pickup with you on WhatsApp.",
   "checkout.title": "Checkout",
   "checkout.name": "Your name",
   "checkout.namePlaceholder": "Name for the order",
@@ -435,9 +441,15 @@ const ES: Dict = {
 
   // cart + checkout
   "cart.title": "Tu Pedido",
+  "cart.titleShop": "Tu Bolsa",
   "cart.empty": "Tu carrito está vacío.",
   "cart.browse": "Explorar el menú",
+  "cart.browseShop": "Explorar la tienda",
   "cart.checkout": "Finalizar",
+  "order.qty": "Cantidad",
+  "shop.wa.header": "Rivero's Street — Pedido de tienda",
+  "shop.payNote": "Paga ahora con tarjeta, o reserva por WhatsApp y paga al recoger.",
+  "shop.checkout.note": "Confirmamos tallas y coordinamos envío o recogida en la ventana contigo por WhatsApp.",
   "checkout.title": "Finalizar",
   "checkout.name": "Tu nombre",
   "checkout.namePlaceholder": "Nombre del pedido",
