@@ -28,6 +28,27 @@ export const surfaceBase = (v: "hub" | "eat" | "shop") =>
 export const eatPath = (p: string) => `${EAT_BASE}${p}`;
 export const shopPath = (p: string) => `${SHOP_BASE}${p}`;
 
+/** True when all surfaces share one host (path-based demo), set via *_BASE. */
+export const SINGLE_DOMAIN = !!(EAT_BASE || SHOP_BASE);
+
+type Surface = "hub" | "eat" | "shop";
+
+/**
+ * Build a nav link to a surface (+ optional sub-path), correct for the host
+ * mode. Single-domain → relative same-origin path (never localhost; lang
+ * persists same-origin). Subdomain → absolute cross-host URL carrying ?lang.
+ */
+export function navHref(target: Surface, subPath: string, lang: string) {
+  if (SINGLE_DOMAIN) {
+    return `${surfaceBase(target)}${subPath}` || "/";
+  }
+  return withLang(`${SITES[target]}${subPath}`, lang);
+}
+
+/** Display label for a surface (clean path in demo, host in production). */
+export const surfaceHost = (target: Surface) =>
+  SINGLE_DOMAIN ? surfaceBase(target) || "/" : hostOf(SITES[target]);
+
 /** Append the current language so it carries across subdomains. */
 export const withLang = (url: string, lang: string) =>
   `${url}${url.includes("?") ? "&" : "?"}lang=${lang}`;

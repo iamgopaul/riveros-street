@@ -6,7 +6,7 @@ import { Footer } from "@/components/Footer";
 import { SectionHeader } from "@/components/SectionHeader";
 import { AwardBadge } from "@/components/AwardBadge";
 import { useI18n } from "@/lib/i18n";
-import { SITES, hostOf, withLang, PHONE_DISPLAY } from "@/lib/sites";
+import { navHref, surfaceHost, PHONE_DISPLAY } from "@/lib/sites";
 import { HOURS } from "@/lib/hours";
 
 export default function HubHome() {
@@ -50,14 +50,14 @@ export default function HubHome() {
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link
-                  href={withLang(SITES.eat, lang)}
+                  href={navHref("eat", "", lang)}
                   className="group inline-flex items-center gap-3 px-8 h-14 bg-accent text-white font-mono uppercase tracking-widest text-sm hover:bg-accent-soft transition-colors"
                 >
                   {t("nav.restaurant")}
                   <span className="transition-transform group-hover:translate-x-1">→</span>
                 </Link>
                 <Link
-                  href={withLang(SITES.shop, lang)}
+                  href={navHref("shop", "", lang)}
                   className="group inline-flex items-center gap-3 px-8 h-14 border border-foreground/25 font-mono uppercase tracking-widest text-sm hover:border-accent-2 hover:text-accent-2 transition-colors"
                 >
                   {t("nav.shop")}
@@ -86,16 +86,16 @@ export default function HubHome() {
               tag={t("hub.house1.tag")}
               title={t("hub.house1.title")}
               body={t("hub.house1.body")}
-              cta={hostOf(SITES.eat)}
-              href={withLang(SITES.eat, lang)}
+              cta={surfaceHost("eat")}
+              href={navHref("eat", "", lang)}
             />
             <HouseCard
               index="02"
               tag={t("hub.house2.tag")}
               title={t("hub.house2.title")}
               body={t("hub.house2.body")}
-              cta={hostOf(SITES.shop)}
-              href={withLang(SITES.shop, lang)}
+              cta={surfaceHost("shop")}
+              href={navHref("shop", "", lang)}
             />
           </div>
         </section>
@@ -115,7 +115,7 @@ export default function HubHome() {
                 label={t("hub.detail.hours")}
                 value={HOURS.map(({ dayKey, time }) => `${t(`day.${dayKey}`)} · ${time}`)}
               />
-              <DetailRow label={t("hub.detail.order")} value={[PHONE_DISPLAY, `${hostOf(SITES.eat)}/menu`]} last />
+              <DetailRow label={t("hub.detail.order")} value={[PHONE_DISPLAY, `${surfaceHost("eat")}/menu`]} last />
             </div>
           </div>
         </section>

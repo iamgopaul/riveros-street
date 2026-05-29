@@ -150,7 +150,7 @@ export function CartDrawer() {
       />
       {/* panel */}
       <div
-        className={`absolute right-0 top-0 h-full w-full sm:max-w-md bg-background border-l border-border flex flex-col transition-transform duration-300 ${
+        className={`absolute right-0 top-0 h-full w-full sm:max-w-md bg-background border-l border-border flex flex-col transition-transform duration-300 pb-[env(safe-area-inset-bottom)] ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >

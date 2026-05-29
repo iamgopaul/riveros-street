@@ -7,7 +7,7 @@ import { Logo } from "./Logo";
 import { LanguageToggle } from "./LanguageToggle";
 import { EatNavActions } from "./EatNavActions";
 import { useI18n } from "@/lib/i18n";
-import { SITES, withLang, surfaceBase } from "@/lib/sites";
+import { navHref, surfaceBase } from "@/lib/sites";
 
 type Variant = "hub" | "eat" | "shop";
 
@@ -35,12 +35,12 @@ export function Nav({ variant, transparent = false }: { variant: Variant; transp
 
   // Main nav — identical on every surface. Cross-subdomain links carry ?lang.
   const main = [
-    { label: t("nav.home"), href: withLang(SITES.hub, lang), active: variant === "hub" && pathname === "/" },
-    { label: t("nav.restaurant"), href: withLang(SITES.eat, lang), active: variant === "eat" },
-    { label: t("nav.shop"), href: withLang(SITES.shop, lang), active: variant === "shop" },
-    { label: t("nav.media"), href: withLang(`${SITES.hub}/media`, lang), active: variant === "hub" && pathname.startsWith("/media") },
-    { label: t("nav.about"), href: withLang(`${SITES.hub}/about`, lang), active: variant === "hub" && pathname.startsWith("/about") },
-    { label: t("nav.contact"), href: withLang(`${SITES.hub}/contact`, lang), active: variant === "hub" && pathname.startsWith("/contact") },
+    { label: t("nav.home"), href: navHref("hub", "", lang), active: variant === "hub" && pathname === "/" },
+    { label: t("nav.restaurant"), href: navHref("eat", "", lang), active: variant === "eat" },
+    { label: t("nav.shop"), href: navHref("shop", "", lang), active: variant === "shop" },
+    { label: t("nav.media"), href: navHref("hub", "/media", lang), active: variant === "hub" && pathname.startsWith("/media") },
+    { label: t("nav.about"), href: navHref("hub", "/about", lang), active: variant === "hub" && pathname.startsWith("/about") },
+    { label: t("nav.contact"), href: navHref("hub", "/contact", lang), active: variant === "hub" && pathname.startsWith("/contact") },
   ];
 
   // Sub nav — per section.
@@ -60,7 +60,7 @@ export function Nav({ variant, transparent = false }: { variant: Variant; transp
 
   return (
     <header
-      className={`z-40 transition-colors duration-300 ${
+      className={`z-40 transition-colors duration-300 pt-[env(safe-area-inset-top)] ${
         transparent ? "fixed top-0 inset-x-0" : "sticky top-0"
       } ${
         floating

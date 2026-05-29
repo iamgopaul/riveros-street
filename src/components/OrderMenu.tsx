@@ -36,8 +36,8 @@ export function OrderMenu() {
   return (
     <>
       {/* sticky category nav */}
-      <div className="sticky top-[6.5rem] sm:top-[7rem] z-30 -mx-6 px-6 bg-background/90 backdrop-blur-md border-y border-border">
-        <div className="max-w-6xl mx-auto flex gap-2 overflow-x-auto py-3 no-scrollbar">
+      <div className="sticky top-[6.5rem] sm:top-[7rem] z-30 bg-background/90 backdrop-blur-md border-y border-border">
+        <div className="max-w-6xl mx-auto px-6 flex gap-2 overflow-x-auto py-3 no-scrollbar">
           {MENU.map((s) => (
             <button
               key={s.key}
@@ -98,7 +98,7 @@ export function OrderMenu() {
 
       {/* floating view-order bar */}
       {count > 0 && (
-        <div className="fixed inset-x-0 bottom-0 z-40 p-4 pointer-events-none">
+        <div className="fixed inset-x-0 bottom-0 z-40 p-4 pb-[calc(1rem+env(safe-area-inset-bottom))] pointer-events-none">
           <button
             onClick={() => setOpen(true)}
             className="pointer-events-auto mx-auto max-w-md w-full flex items-center justify-between gap-4 h-14 px-5 bg-accent text-white font-mono uppercase tracking-widest text-xs shadow-2xl hover:bg-accent-soft transition-colors"
