@@ -20,7 +20,32 @@ convention) — no extra config needed. Vercel runs it automatically at the edge
 
 The first deploy works immediately on the `*.vercel.app` URL (it shows the hub).
 
-## 2. Add the domains
+## Quick demo on one Vercel URL (no custom domain)
+
+Vercel **won't** let you create `eat.<project>.vercel.app` / `shop.<project>.vercel.app`
+— the `*.vercel.app` namespace is Vercel's. To demo all three surfaces on your
+single project host, serve them by **path** instead and set base paths so the
+in-surface links resolve. In **Settings → Environment Variables**, add:
+
+```
+NEXT_PUBLIC_HUB_URL=https://<project>.vercel.app
+NEXT_PUBLIC_EAT_URL=https://<project>.vercel.app/eat
+NEXT_PUBLIC_SHOP_URL=https://<project>.vercel.app/shop
+NEXT_PUBLIC_EAT_BASE=/eat
+NEXT_PUBLIC_SHOP_BASE=/shop
+```
+
+Redeploy, then browse:
+
+- Hub:        `https://<project>.vercel.app`
+- Food truck: `https://<project>.vercel.app/eat`
+- Shop:       `https://<project>.vercel.app/shop`
+
+When you later add a real domain (below), **remove the two `*_BASE` vars** and point
+the `*_URL` vars at the subdomains — the app switches back to clean root-relative
+links automatically.
+
+## 2. Add the domains (real subdomains)
 
 In **Project → Settings → Domains**, add all three:
 

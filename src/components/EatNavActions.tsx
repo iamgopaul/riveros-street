@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCart } from "@/lib/cart";
 import { useI18n } from "@/lib/i18n";
+import { eatPath } from "@/lib/sites";
 
 /** Top-right actions on the food-truck nav: "Order Now" + a cart button. */
 export function EatNavActions() {
@@ -12,7 +13,7 @@ export function EatNavActions() {
   return (
     <div className="flex items-center gap-2 sm:gap-3">
       <Link
-        href="/menu"
+        href={eatPath("/menu")}
         className="hidden sm:inline-flex items-center gap-2 h-10 px-4 bg-accent text-white font-mono uppercase tracking-widest text-[11px] hover:bg-accent-soft transition-colors"
       >
         {t("nav.orderNow")}

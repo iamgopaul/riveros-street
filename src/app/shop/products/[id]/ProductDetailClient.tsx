@@ -4,6 +4,7 @@ import Link from "next/link";
 import { type Product } from "@/lib/products";
 import { ProductMedia } from "@/components/ProductMedia";
 import { useI18n } from "@/lib/i18n";
+import { shopPath } from "@/lib/sites";
 
 export function ProductDetailClient({ product }: { product: Product }) {
   const { t, lang } = useI18n();
@@ -11,7 +12,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
 
   return (
     <section className="max-w-7xl mx-auto px-6 py-28">
-      <Link href="/products" className="text-xs uppercase tracking-widest text-accent link-shimmer">
+      <Link href={shopPath("/products")} className="text-xs uppercase tracking-widest text-accent link-shimmer">
         {t("products.back")}
       </Link>
 

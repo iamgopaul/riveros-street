@@ -5,6 +5,7 @@ import { type Product } from "@/lib/products";
 import { SectionHeader } from "@/components/SectionHeader";
 import { ProductMedia } from "@/components/ProductMedia";
 import { useI18n } from "@/lib/i18n";
+import { shopPath } from "@/lib/sites";
 
 const CATEGORIES = ["All", "Outerwear", "Tops", "Bottoms", "Accessories"] as const;
 
@@ -54,7 +55,7 @@ export function CatalogClient({
 
       <div className="mt-12 grid gap-px bg-border border border-border grid-cols-2 lg:grid-cols-4">
         {products.map((p, i) => (
-          <Link key={p.id} href={`/products/${p.id}`} className="group block bg-background">
+          <Link key={p.id} href={shopPath(`/products/${p.id}`)} className="group block bg-background">
             <div className="aspect-[3/4] relative overflow-hidden" style={{ background: p.swatch }}>
               <ProductMedia images={p.images} alt={p.name} sizes="(max-width:1024px) 50vw, 25vw" priority={i === 0} />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />

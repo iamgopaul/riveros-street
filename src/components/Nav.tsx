@@ -7,7 +7,7 @@ import { Logo } from "./Logo";
 import { LanguageToggle } from "./LanguageToggle";
 import { EatNavActions } from "./EatNavActions";
 import { useI18n } from "@/lib/i18n";
-import { SITES, withLang } from "@/lib/sites";
+import { SITES, withLang, surfaceBase } from "@/lib/sites";
 
 type Variant = "hub" | "eat" | "shop";
 
@@ -47,13 +47,13 @@ export function Nav({ variant, transparent = false }: { variant: Variant; transp
   const sub: Record<Variant, { label: string; href: string }[]> = {
     hub: [],
     eat: [
-      { label: t("nav.menu"), href: "/menu" },
-      { label: t("nav.reservations"), href: "/find" },
+      { label: t("nav.menu"), href: `${surfaceBase("eat")}/menu` },
+      { label: t("nav.reservations"), href: `${surfaceBase("eat")}/find` },
     ],
     shop: [
-      { label: t("nav.trending"), href: "/products?filter=trending" },
-      { label: t("nav.new"), href: "/products?filter=new" },
-      { label: t("nav.all"), href: "/products" },
+      { label: t("nav.trending"), href: `${surfaceBase("shop")}/products?filter=trending` },
+      { label: t("nav.new"), href: `${surfaceBase("shop")}/products?filter=new` },
+      { label: t("nav.all"), href: `${surfaceBase("shop")}/products` },
     ],
   };
   const subLinks = sub[variant];
@@ -72,7 +72,7 @@ export function Nav({ variant, transparent = false }: { variant: Variant; transp
 
       {/* ── MAIN ROW ─────────────────────────────────── */}
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
-        <Logo href="/" tone={floating ? "red" : "default"} />
+        <Logo href={surfaceBase(variant) || "/"} tone={floating ? "red" : "default"} />
         <nav className="hidden md:flex items-center gap-6 lg:gap-8 text-xs lg:text-sm uppercase tracking-widest">
           {main.map((l) => (
             <a

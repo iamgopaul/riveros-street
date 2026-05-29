@@ -11,6 +11,23 @@ export const SITES = {
 /** Strip the protocol for display, e.g. "eat.localhost:6001". */
 export const hostOf = (url: string) => url.replace(/^https?:\/\//, "");
 
+/**
+ * Surface base path for internal links.
+ * - Subdomain hosting (production): empty — links are root-relative ("/menu")
+ *   and `proxy.ts` rewrites them under /eat or /shop based on the host.
+ * - Single-domain demo (one *.vercel.app host): set NEXT_PUBLIC_EAT_BASE=/eat
+ *   and NEXT_PUBLIC_SHOP_BASE=/shop so links resolve to the real routes.
+ */
+export const EAT_BASE = process.env.NEXT_PUBLIC_EAT_BASE ?? "";
+export const SHOP_BASE = process.env.NEXT_PUBLIC_SHOP_BASE ?? "";
+
+export const surfaceBase = (v: "hub" | "eat" | "shop") =>
+  v === "eat" ? EAT_BASE : v === "shop" ? SHOP_BASE : "";
+
+/** Prefix an in-surface path with its base (e.g. eatPath("/menu")). */
+export const eatPath = (p: string) => `${EAT_BASE}${p}`;
+export const shopPath = (p: string) => `${SHOP_BASE}${p}`;
+
 /** Append the current language so it carries across subdomains. */
 export const withLang = (url: string, lang: string) =>
   `${url}${url.includes("?") ? "&" : "?"}lang=${lang}`;

@@ -6,6 +6,7 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { Palm } from "@/components/Palm";
 import { ProductMedia } from "@/components/ProductMedia";
 import { useI18n } from "@/lib/i18n";
+import { shopPath } from "@/lib/sites";
 
 export default function ShopHome() {
   const { t } = useI18n();
@@ -38,7 +39,7 @@ export default function ShopHome() {
           <div className="mt-10 grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
             <p className="max-w-md self-start text-foreground/80 text-lg leading-relaxed bg-background/55 backdrop-blur-sm border border-border/60 p-5">{t("shop.lede")}</p>
             <Link
-              href="/products"
+              href={shopPath("/products")}
               className="group inline-flex items-center gap-3 px-8 h-14 bg-accent text-white font-mono uppercase tracking-widest text-sm hover:bg-accent-soft transition-colors"
             >
               {t("shop.shopDrop")}
@@ -54,7 +55,7 @@ export default function ShopHome() {
       <section className="max-w-7xl mx-auto px-6 py-28">
         <div className="flex items-end justify-between mb-12">
           <SectionHeader index="//" label={t("shop.featured")} title={t("shop.newIn")} />
-          <Link href="/products" className="font-mono text-sm uppercase tracking-widest text-accent link-shimmer shrink-0">
+          <Link href={shopPath("/products")} className="font-mono text-sm uppercase tracking-widest text-accent link-shimmer shrink-0">
             {t("shop.viewAll")} →
           </Link>
         </div>
@@ -83,7 +84,7 @@ export default function ShopHome() {
 function ProductCard({ product, priority = false }: { product: Product; priority?: boolean }) {
   const { t } = useI18n();
   return (
-    <Link href={`/products/${product.id}`} className="group block bg-background">
+    <Link href={shopPath(`/products/${product.id}`)} className="group block bg-background">
       <div className="aspect-[3/4] relative overflow-hidden" style={{ background: product.swatch }}>
         <ProductMedia images={product.images} alt={product.name} sizes="(max-width:1024px) 50vw, 25vw" priority={priority} />
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />

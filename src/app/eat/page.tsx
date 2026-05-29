@@ -6,6 +6,7 @@ import { Palm } from "@/components/Palm";
 import { Reviews } from "@/components/Reviews";
 import { useI18n } from "@/lib/i18n";
 import { HOURS } from "@/lib/hours";
+import { eatPath } from "@/lib/sites";
 
 export default function EatHome() {
   const { t } = useI18n();
@@ -31,13 +32,13 @@ export default function EatHome() {
             <p className="max-w-xl text-foreground/70 text-lg leading-relaxed">{t("eat.lede")}</p>
             <div className="flex flex-wrap gap-4">
               <Link
-                href="/menu"
+                href={eatPath("/menu")}
                 className="group inline-flex items-center gap-3 px-8 h-14 bg-accent text-white font-mono uppercase tracking-widest text-sm hover:bg-accent-soft transition-colors"
               >
                 {t("nav.orderNow")} <span className="transition-transform group-hover:translate-x-1">→</span>
               </Link>
               <Link
-                href="/find"
+                href={eatPath("/find")}
                 className="inline-flex items-center gap-3 px-8 h-14 border border-foreground/25 font-mono uppercase tracking-widest text-sm hover:border-accent-2 hover:text-accent-2 transition-colors"
               >
                 {t("eat.reserve")} →
@@ -87,7 +88,7 @@ export default function EatHome() {
               </div>
             ))}
             <Link
-              href="/find"
+              href={eatPath("/find")}
               className="mt-8 inline-flex items-center gap-3 px-8 h-14 bg-accent text-white font-mono uppercase tracking-widest text-sm hover:bg-accent-soft transition-colors"
             >
               {t("eat.bookTable")} →

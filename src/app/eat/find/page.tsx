@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { SectionHeader } from "@/components/SectionHeader";
 import { useI18n } from "@/lib/i18n";
-import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/sites";
+import { PHONE_DISPLAY, PHONE_TEL, eatPath } from "@/lib/sites";
 import { HOURS } from "@/lib/hours";
 
 const MAPS_URL =
@@ -115,7 +115,7 @@ export default function FindPage() {
             );
           })}
           <Link
-            href="/menu"
+            href={eatPath("/menu")}
             className="mt-8 inline-flex items-center gap-3 px-6 h-12 bg-accent text-white font-mono uppercase tracking-widest text-xs hover:bg-accent-soft transition-colors"
           >
             {t("nav.orderNow")} →
