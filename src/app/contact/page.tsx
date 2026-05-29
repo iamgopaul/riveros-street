@@ -89,7 +89,7 @@ export default function ContactPage() {
 
         {/* map */}
         <section className="border-t border-border">
-          <div className="border-b border-border overflow-hidden aspect-[16/6] grayscale contrast-125">
+          <div className="border-b border-border overflow-hidden aspect-[16/6] [&_iframe]:invert [&_iframe]:hue-rotate-180">
             <iframe
               title="Rivero's Street location map"
               src="https://www.google.com/maps?q=30+Lowery+Rd+Unit+B+Freeport+FL+32439&output=embed"

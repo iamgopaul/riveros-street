@@ -24,7 +24,14 @@ export function Reviews() {
           <SectionHeader index="//" label={t("reviews.eyebrow")} title={t("reviews.title")} />
           <div className="flex items-center gap-3">
             <span className="font-mono text-4xl gold-text">{RATING.average.toFixed(1)}</span>
-            <Stars n={Math.round(RATING.average)} />
+            <div className="flex flex-col gap-1">
+              <Stars n={Math.round(RATING.average)} />
+              {RATING.count > 0 && (
+                <span className="text-xs uppercase tracking-[0.3em] text-foreground/45">
+                  {RATING.count} {t("reviews.count")}
+                </span>
+              )}
+            </div>
           </div>
         </div>
 

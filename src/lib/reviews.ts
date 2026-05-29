@@ -22,7 +22,7 @@ export type Review = {
 };
 
 /** Aggregate shown in the heading — update to match the real Google rating. */
-export const RATING = { average: 4.9, count: 0 };
+export const RATING = { average: 4.9, count: 510 };
 
 export const REVIEWS: Review[] = [
   {

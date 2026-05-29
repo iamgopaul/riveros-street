@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { SectionHeader } from "@/components/SectionHeader";
-import { Palm } from "@/components/Palm";
 import { useI18n } from "@/lib/i18n";
 import { SITES, hostOf, withLang, PHONE_DISPLAY } from "@/lib/sites";
 import { HOURS } from "@/lib/hours";
@@ -24,8 +23,6 @@ export default function HubHome() {
             style={{ backgroundImage: "url(/home-bg.webp)" }}
           />
           <div aria-hidden className="absolute inset-0 pointer-events-none bg-gradient-to-b from-background/55 via-background/50 to-background" />
-          <Palm className="absolute -left-10 bottom-0 w-44 h-auto text-accent/10 pointer-events-none" />
-          <Palm flip className="absolute -right-10 top-8 w-52 h-auto text-accent-2/10 pointer-events-none" />
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <span className="watermark text-[26vw] leading-none">850</span>
           </div>

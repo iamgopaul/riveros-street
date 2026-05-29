@@ -33,7 +33,16 @@ export default function MenuPage() {
                     <div className="font-mono uppercase text-lg">{item.name}</div>
                     <div className="text-foreground/60 mt-1">{item.description[lang]}</div>
                   </div>
-                  <div className="font-mono text-accent text-lg">${item.price}</div>
+                  <div className="text-right">
+                    <div className="font-mono text-accent text-lg">
+                      ${item.price.toFixed(2).replace(/\.00$/, "")}
+                    </div>
+                    {item.priceNote && (
+                      <div className="text-[11px] uppercase tracking-widest text-foreground/40 mt-1">
+                        {item.priceNote[lang]}
+                      </div>
+                    )}
+                  </div>
                 </li>
               ))}
             </ul>

@@ -102,10 +102,17 @@ const EN: Dict = {
   "menu.lede": "Made by hand, fresh off the grill. Here is what we are serving today.",
   "menu.plates": "items",
   "menu.reserve": "Find the Truck",
+  "menu.section.appetizers": "Appetizers",
   "menu.section.arepas": "Arepas",
-  "menu.section.empanadas": "Empanadas & Fritos",
-  "menu.section.platos": "Platos",
-  "menu.section.dulces": "Dulces & Bebidas",
+  "menu.section.buildYourOwn": "Build Your Own",
+  "menu.section.pepitos": "Pepitos",
+  "menu.section.burgers": "Burgers",
+  "menu.section.cachapas": "Cachapas",
+  "menu.section.patacones": "Patacones",
+  "menu.section.sides": "Sides",
+  "menu.section.kids": "Kids Menu",
+  "menu.section.loadedFries": "Loaded Fries",
+  "menu.section.beverages": "Beverages",
 
   // find us
   "find.eyebrow": "Find Us",
@@ -131,6 +138,7 @@ const EN: Dict = {
   "reviews.eyebrow": "What People Say",
   "reviews.title": "Straight from our guests.",
   "reviews.cta": "Read all reviews on Google",
+  "reviews.count": "Google reviews",
 
   // shop home
   "shop.ss26": "SS26",
@@ -308,10 +316,17 @@ const ES: Dict = {
   "menu.lede": "Hecho a mano, recién salido de la plancha. Esto es lo que servimos hoy.",
   "menu.plates": "platos",
   "menu.reserve": "Encuentra el Camión",
+  "menu.section.appetizers": "Entradas",
   "menu.section.arepas": "Arepas",
-  "menu.section.empanadas": "Empanadas y Fritos",
-  "menu.section.platos": "Platos",
-  "menu.section.dulces": "Dulces y Bebidas",
+  "menu.section.buildYourOwn": "Arma Tu Plato",
+  "menu.section.pepitos": "Pepitos",
+  "menu.section.burgers": "Hamburguesas",
+  "menu.section.cachapas": "Cachapas",
+  "menu.section.patacones": "Patacones",
+  "menu.section.sides": "Acompañantes",
+  "menu.section.kids": "Menú Infantil",
+  "menu.section.loadedFries": "Papas Cargadas",
+  "menu.section.beverages": "Bebidas",
 
   // find us
   "find.eyebrow": "Ubicación",
@@ -337,6 +352,7 @@ const ES: Dict = {
   "reviews.eyebrow": "Lo Que Dicen",
   "reviews.title": "Directo de nuestros clientes.",
   "reviews.cta": "Ver todas las reseñas en Google",
+  "reviews.count": "reseñas en Google",
 
   // shop home
   "shop.ss26": "SS26",
