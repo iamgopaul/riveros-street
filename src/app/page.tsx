@@ -28,9 +28,9 @@ export default function HubHome() {
             <span className="watermark text-[26vw] leading-none">850</span>
           </div>
 
-          {/* Restaurant Guru award — corner seal, top-right, clear of the nav
-              (safe-area aware so it sits below the bar on notched phones). */}
-          <AwardBadge className="absolute z-10 drop-shadow-[0_8px_24px_rgba(0,0,0,0.55)] right-4 top-[calc(7rem+env(safe-area-inset-top))] w-16 sm:right-8 sm:w-28 md:top-32 md:w-36" />
+          {/* Restaurant Guru award — phones: a seal centered on the right edge,
+              clear of the content. Tablet/desktop: a top-right corner seal. */}
+          <AwardBadge className="absolute z-10 drop-shadow-[0_8px_24px_rgba(0,0,0,0.55)] right-3 top-1/2 -translate-y-1/2 w-16 sm:top-28 sm:right-8 sm:translate-y-0 sm:w-28 md:top-32 md:w-36" />
 
           <div className="relative max-w-7xl mx-auto px-6 w-full flex-1 flex flex-col justify-center pt-[calc(7rem+env(safe-area-inset-top))] pb-16">
             <div className="tick inline-flex self-start text-[11px] uppercase tracking-[0.4em] text-foreground/70 mb-8 float-up bg-background/55 backdrop-blur-sm border border-border/60 px-4 py-2">
@@ -45,7 +45,7 @@ export default function HubHome() {
             </h1>
 
             <div className="mt-10 grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
-              <p className="max-w-md self-start text-foreground/80 text-base sm:text-lg leading-relaxed bg-background/55 backdrop-blur-sm border border-border/60 p-5">
+              <p className="max-w-[14rem] sm:max-w-md self-start text-foreground/80 text-base sm:text-lg leading-relaxed bg-background/55 backdrop-blur-sm border border-border/60 p-5">
                 {t("hub.lede")}
               </p>
               <div className="flex flex-wrap gap-4">

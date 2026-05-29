@@ -17,9 +17,9 @@ const geistMono = Geist_Mono({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  // Extend under the notch/Dynamic Island so the nav can cover the safe area,
-  // and match the browser chrome to the dark theme (no light strip on iOS).
-  viewportFit: "cover",
+  // No viewport-fit:cover — let iOS inset content below the status bar so no
+  // page content can ever sit above the nav. themeColor keeps the status bar
+  // dark so it blends with the site instead of showing a light strip.
   themeColor: "#050505",
 };
 
