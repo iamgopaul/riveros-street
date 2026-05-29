@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Logo } from "./Logo";
@@ -15,9 +16,21 @@ function isActive(pathname: string, href: string) {
   return pathname === path || pathname.startsWith(path + "/");
 }
 
-export function Nav({ variant }: { variant: Variant }) {
+export function Nav({ variant, transparent = false }: { variant: Variant; transparent?: boolean }) {
   const { t, lang } = useI18n();
   const pathname = usePathname();
+
+  // When `transparent`, the bar floats over the hero (red logo) until the page
+  // is scrolled, then it snaps to the solid blurred background (white logo).
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    if (!transparent) return;
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [transparent]);
+  const floating = transparent && !scrolled;
 
   // Main nav — identical on every surface. Cross-subdomain links carry ?lang.
   const main = [
@@ -46,12 +59,20 @@ export function Nav({ variant }: { variant: Variant }) {
   const subLinks = sub[variant];
 
   return (
-    <header className="sticky top-0 z-40 backdrop-blur-md bg-background/70 border-b border-border">
-      <div className="h-1 w-full hazard-thin" />
+    <header
+      className={`z-40 transition-colors duration-300 ${
+        transparent ? "fixed top-0 inset-x-0" : "sticky top-0"
+      } ${
+        floating
+          ? "bg-transparent border-b border-transparent"
+          : "backdrop-blur-md bg-background/70 border-b border-border"
+      }`}
+    >
+      {!floating && <div className="h-1 w-full hazard-thin" />}
 
       {/* ── MAIN ROW ─────────────────────────────────── */}
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
-        <Logo href="/" />
+        <Logo href="/" tone={floating ? "red" : "default"} />
         <nav className="hidden md:flex items-center gap-6 lg:gap-8 text-xs lg:text-sm uppercase tracking-widest">
           {main.map((l) => (
             <a
@@ -70,7 +91,7 @@ export function Nav({ variant }: { variant: Variant }) {
       </div>
 
       {/* ── MOBILE MAIN LINKS (every surface) ─────────── */}
-      <div className="md:hidden border-t border-border bg-black/40">
+      <div className={`md:hidden ${floating ? "" : "border-t border-border bg-black/40"}`}>
         <div className="max-w-7xl mx-auto px-6 h-11 flex items-center gap-7 text-xs uppercase tracking-widest overflow-x-auto">
           {main.map((l) => (
             <a

@@ -72,7 +72,7 @@ export default function FindPage() {
       <div className="mt-px border border-border overflow-hidden aspect-[16/7] [&_iframe]:invert [&_iframe]:hue-rotate-180">
         <iframe
           title="Rivero's Street location map"
-          src="https://www.google.com/maps?q=30+Lowery+Rd+Unit+B+Freeport+FL+32439&output=embed"
+          src="https://www.google.com/maps?q=Rivero%27s+Street%2C+30+Lowery+Rd+Unit+B%2C+Freeport%2C+FL+32439&output=embed"
           className="w-full h-full"
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"

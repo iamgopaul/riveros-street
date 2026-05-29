@@ -12,10 +12,10 @@ export default function HubHome() {
   const { t, lang } = useI18n();
   return (
     <>
-      <Nav variant="hub" />
+      <Nav variant="hub" transparent />
       <main className="flex-1">
         {/* ── HERO ───────────────────────────────────────── */}
-        <section className="relative overflow-hidden border-b border-border flex flex-col min-h-[calc(100svh-4.25rem)]">
+        <section className="relative overflow-hidden border-b border-border flex flex-col min-h-[100svh]">
           {/* Hero background image with a scrim that fades into the page */}
           <div
             aria-hidden
@@ -28,6 +28,7 @@ export default function HubHome() {
           </div>
 
           <div className="relative max-w-7xl mx-auto px-6 w-full flex-1 flex flex-col justify-center py-16">
+            <div className="self-start max-w-3xl bg-background/55 backdrop-blur-md border border-border/60 p-7 sm:p-10">
             <div className="tick text-[11px] uppercase tracking-[0.4em] text-foreground/60 mb-8 float-up">
               <span className="font-mono text-accent">{t("hub.est")}</span>
               <span>{t("hub.oneAddress")}</span>
@@ -59,6 +60,7 @@ export default function HubHome() {
                   <span className="transition-transform group-hover:translate-x-1">→</span>
                 </Link>
               </div>
+            </div>
             </div>
           </div>
         </section>
