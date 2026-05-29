@@ -341,3 +341,9 @@ body {
 
 /* Legacy alias kept so existing hero sections stay calm. */
 .noise-bg { background: transparent; }
+
+/* Black-and-red theming for embedded Google Maps (basic embeds can't be styled
+   via the API, so we recolor the whole iframe with a filter chain). */
+.map-themed iframe {
+  filter: invert(1) sepia(1) saturate(10) hue-rotate(318deg) brightness(0.7) contrast(1.3);
+}

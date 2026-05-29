@@ -69,7 +69,7 @@ export default function FindPage() {
       </div>
 
       {/* Map embed */}
-      <div className="mt-px border border-border overflow-hidden aspect-[16/7] [&_iframe]:invert [&_iframe]:hue-rotate-180">
+      <div className="mt-px border border-border overflow-hidden aspect-[16/7] map-themed">
         <iframe
           title="Rivero's Street location map"
           src="https://www.google.com/maps?q=Rivero%27s+Street%2C+30+Lowery+Rd+Unit+B%2C+Freeport%2C+FL+32439&output=embed"
