@@ -1,65 +1,167 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import Link from "next/link";
+import { Nav } from "@/components/Nav";
+import { Footer } from "@/components/Footer";
+import { SectionHeader } from "@/components/SectionHeader";
+import { Palm } from "@/components/Palm";
+import { useI18n } from "@/lib/i18n";
+import { SITES, hostOf, withLang, PHONE_DISPLAY } from "@/lib/sites";
+import { HOURS } from "@/lib/hours";
+
+export default function HubHome() {
+  const { t, lang } = useI18n();
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+    <>
+      <Nav variant="hub" />
+      <main className="flex-1">
+        {/* ── HERO ───────────────────────────────────────── */}
+        <section className="relative overflow-hidden border-b border-border flex flex-col min-h-[calc(100svh-4.25rem)]">
+          {/* Hero background image with a scrim that fades into the page */}
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none"
+            style={{ backgroundImage: "url(/home-bg.webp)" }}
+          />
+          <div aria-hidden className="absolute inset-0 pointer-events-none bg-gradient-to-b from-background/55 via-background/50 to-background" />
+          <Palm className="absolute -left-10 bottom-0 w-44 h-auto text-accent/10 pointer-events-none" />
+          <Palm flip className="absolute -right-10 top-8 w-52 h-auto text-accent-2/10 pointer-events-none" />
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <span className="watermark text-[26vw] leading-none">850</span>
+          </div>
+
+          <div className="relative max-w-7xl mx-auto px-6 w-full flex-1 flex flex-col justify-center py-16">
+            <div className="tick text-[11px] uppercase tracking-[0.4em] text-foreground/60 mb-8 float-up">
+              <span className="font-mono text-accent">{t("hub.est")}</span>
+              <span>{t("hub.oneAddress")}</span>
+            </div>
+
+            <h1 className="hero-stagger font-mono font-bold uppercase tracking-tight leading-[0.85] text-[clamp(3.5rem,13vw,10rem)]">
+              <span className="block hero-line">{t("hub.h1.a")}</span>
+              <span className="block gold-text hero-line-glow">{t("hub.h1.b")}</span>
+              <span className="block cyan-text hero-line-glow">{t("hub.h1.c")}</span>
+            </h1>
+
+            <div className="mt-10 grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
+              <p className="max-w-md text-foreground/70 text-base sm:text-lg leading-relaxed">
+                {t("hub.lede")}
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Link
+                  href={withLang(SITES.eat, lang)}
+                  className="group inline-flex items-center gap-3 px-8 h-14 bg-accent text-white font-mono uppercase tracking-widest text-sm hover:bg-accent-soft transition-colors"
+                >
+                  {t("nav.restaurant")}
+                  <span className="transition-transform group-hover:translate-x-1">→</span>
+                </Link>
+                <Link
+                  href={withLang(SITES.shop, lang)}
+                  className="group inline-flex items-center gap-3 px-8 h-14 border border-foreground/25 font-mono uppercase tracking-widest text-sm hover:border-accent-2 hover:text-accent-2 transition-colors"
+                >
+                  {t("nav.shop")}
+                  <span className="transition-transform group-hover:translate-x-1">→</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── INFO STRIP ─────────────────────────────────── */}
+        <section className="border-b border-border bg-black">
+          <div className="max-w-7xl mx-auto grid sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-border">
+            <StripCell label={t("hub.strip.cuisine")} value={t("eat.kitchen")} />
+            <StripCell label={t("hub.detail.address")} value={t("hub.strip.where")} />
+            <StripCell label={t("hub.detail.hours")} value={t("hub.strip.hours")} />
+          </div>
+        </section>
+
+        {/* ── TWO HOUSES ─────────────────────────────────── */}
+        <section id="story" className="max-w-7xl mx-auto px-6 py-28">
+          <SectionHeader index="//" label={t("hub.twoHouses")} title={t("hub.twoHouses.title")} />
+          <div className="grid gap-6 md:grid-cols-2 mt-14">
+            <HouseCard
+              index="01"
+              tag={t("hub.house1.tag")}
+              title={t("hub.house1.title")}
+              body={t("hub.house1.body")}
+              cta={hostOf(SITES.eat)}
+              href={withLang(SITES.eat, lang)}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+            <HouseCard
+              index="02"
+              tag={t("hub.house2.tag")}
+              title={t("hub.house2.title")}
+              body={t("hub.house2.body")}
+              cta={hostOf(SITES.shop)}
+              href={withLang(SITES.shop, lang)}
+            />
+          </div>
+        </section>
+
+        {/* ── CONTACT ────────────────────────────────────── */}
+        <section id="contact" className="border-t border-border">
+          <div className="max-w-7xl mx-auto px-6 py-28 grid gap-12 md:grid-cols-2 md:items-center">
+            <div>
+              <SectionHeader index="//" label={t("hub.findUs")} />
+              <h3 className="mt-5 font-mono font-bold uppercase text-4xl sm:text-6xl leading-[0.95]">
+                {t("hub.come")}<br /><span className="stencil-outline">{t("hub.stay")}</span>
+              </h3>
+            </div>
+            <div className="space-y-0">
+              <DetailRow label={t("hub.detail.address")} value={["30 Lowery Rd, Unit B", "Freeport, FL 32439"]} />
+              <DetailRow
+                label={t("hub.detail.hours")}
+                value={HOURS.map(({ dayKey, time }) => `${t(`day.${dayKey}`)} · ${time}`)}
+              />
+              <DetailRow label={t("hub.detail.order")} value={[PHONE_DISPLAY, `${hostOf(SITES.eat)}/order`]} last />
+            </div>
+          </div>
+        </section>
       </main>
+      <Footer />
+    </>
+  );
+}
+
+function StripCell({ label, value }: { label: string; value: string }) {
+  const lines = value.split("\n");
+  return (
+    <div className="px-6 py-7">
+      <div className="tick text-[10px] uppercase tracking-[0.4em] text-accent mb-3">{label}</div>
+      <div className="font-mono uppercase text-sm sm:text-base text-foreground/90 leading-snug space-y-0.5">
+        {lines.map((line) => <div key={line}>{line}</div>)}
+      </div>
+    </div>
+  );
+}
+
+function HouseCard({
+  index, tag, title, body, cta, href,
+}: { index: string; tag: string; title: string; body: string; cta: string; href: string }) {
+  return (
+    <a href={href} className="group relative panel panel-hover block p-10 overflow-hidden">
+      <span className="watermark text-[12rem] -bottom-10 -right-4 leading-none">{index}</span>
+      <div className="relative">
+        <div className="flex items-center justify-between mb-8">
+          <span className="font-mono text-accent text-sm tracking-[0.3em]">{index}</span>
+          <span className="text-[11px] uppercase tracking-[0.4em] text-foreground/50">{tag}</span>
+        </div>
+        <div className="font-mono font-bold uppercase text-4xl mb-5">{title}</div>
+        <p className="text-foreground/70 leading-relaxed max-w-md">{body}</p>
+        <div className="mt-10 inline-flex items-center gap-3 font-mono text-sm uppercase tracking-widest text-accent">
+          {cta}
+          <span className="transition-transform group-hover:translate-x-1">→</span>
+        </div>
+      </div>
+    </a>
+  );
+}
+
+function DetailRow({ label, value, last }: { label: string; value: string[]; last?: boolean }) {
+  return (
+    <div className={`grid grid-cols-[7rem_1fr] gap-6 py-5 ${last ? "" : "border-b border-border"}`}>
+      <div className="text-[11px] uppercase tracking-[0.3em] text-accent pt-1">{label}</div>
+      <div className="space-y-1 text-foreground/80">{value.map((v) => <div key={v}>{v}</div>)}</div>
     </div>
   );
 }

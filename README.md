@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Riveros Street
 
-## Getting Started
+Black-themed Next.js monorepo serving three surfaces from one codebase:
 
-First, run the development server:
+| URL                          | Surface       |
+| ---------------------------- | ------------- |
+| `riverosstreet.com`          | Hub landing   |
+| `eat.riverosstreet.com`      | Restaurant    |
+| `shop.riverosstreet.com`     | Clothing label |
+
+Routing is handled by [src/middleware.ts](src/middleware.ts), which rewrites
+subdomain requests to `/eat/*` and `/shop/*` internally.
+
+## Local development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Hub:        http://localhost:3000
+- Restaurant: http://eat.localhost:3000
+- Shop:       http://shop.localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Modern browsers resolve `*.localhost` automatically — no `/etc/hosts` edits needed.
 
-## Learn More
+## Deploying to Vercel
 
-To learn more about Next.js, take a look at the following resources:
+1. `vercel link` and push the project.
+2. In Vercel project settings → Domains, add:
+   - `riverosstreet.com` (apex)
+   - `www.riverosstreet.com` (redirect to apex)
+   - `eat.riverosstreet.com`
+   - `shop.riverosstreet.com`
+3. At your DNS provider:
+   - `A` record `@` → `76.76.21.21` (Vercel apex IP)
+   - `CNAME` `www`  → `cname.vercel-dns.com`
+   - `CNAME` `eat`  → `cname.vercel-dns.com`
+   - `CNAME` `shop` → `cname.vercel-dns.com`
+4. Vercel issues SSL certs automatically.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+  middleware.ts       subdomain → internal route rewrites
+  app/
+    layout.tsx        root shell (black bg, fonts, grain overlay)
+    page.tsx          HUB landing
+    eat/              RESTAURANT (eat.*)
+      layout.tsx
+      page.tsx
+      menu/page.tsx
+      reservations/page.tsx
+      order/page.tsx
+    shop/             CLOTHING (shop.*)
+      layout.tsx
+      page.tsx
+      products/page.tsx
+      products/[id]/page.tsx
+  components/         shared Nav, Footer, Logo
+  lib/                static menu + product data (Phase 1)
+```
 
-## Deploy on Vercel
+## Roadmap
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Phase 1 (now)** — Scaffold, black/gold design, three surfaces with static
+  data, subdomain routing, reservation form (UI only).
+- **Phase 2** — Supabase (products, menu, reservations persist) + admin pages.
+- **Phase 3** — Stripe checkout (clothing) + online ordering (restaurant).
