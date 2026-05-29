@@ -28,9 +28,9 @@ export default function HubHome() {
             <span className="watermark text-[26vw] leading-none">850</span>
           </div>
 
-          {/* Restaurant Guru award — phones: a seal centered on the right edge,
-              clear of the content. Tablet/desktop: a top-right corner seal. */}
-          <AwardBadge className="absolute z-10 drop-shadow-[0_8px_24px_rgba(0,0,0,0.55)] right-4 top-[calc(7rem+env(safe-area-inset-top))] w-24 sm:top-28 sm:right-8 sm:w-28 md:top-32 md:w-36" />
+          {/* Restaurant Guru award — tablet/desktop: top-right corner seal.
+              (Phones get a badge anchored to the headline below.) */}
+          <AwardBadge className="hidden sm:block absolute z-10 drop-shadow-[0_8px_24px_rgba(0,0,0,0.55)] right-8 top-28 w-28 md:top-32 md:w-36" />
 
           <div className="relative max-w-7xl mx-auto px-6 w-full flex-1 flex flex-col justify-center pt-[calc(7rem+env(safe-area-inset-top))] pb-16">
             <div className="tick inline-flex self-start text-[11px] uppercase tracking-[0.4em] text-foreground/70 mb-8 float-up bg-background/55 backdrop-blur-sm border border-border/60 px-4 py-2">
@@ -38,14 +38,18 @@ export default function HubHome() {
               <span>{t("hub.oneAddress")}</span>
             </div>
 
-            <h1 className="hero-stagger font-mono font-bold uppercase tracking-tight leading-[0.85] text-[clamp(3.5rem,13vw,10rem)]">
-              <span className="block hero-line-glow">{t("hub.h1.a")}</span>
-              <span className="block gold-text hero-line-glow">{t("hub.h1.b")}</span>
-              <span className="block cyan-text hero-line-glow">{t("hub.h1.c")}</span>
-            </h1>
+            <div className="relative">
+              <h1 className="hero-stagger font-mono font-bold uppercase tracking-tight leading-[0.85] text-[clamp(3.5rem,13vw,10rem)]">
+                <span className="block hero-line-glow">{t("hub.h1.a")}</span>
+                <span className="block gold-text hero-line-glow">{t("hub.h1.b")}</span>
+                <span className="block cyan-text hero-line-glow">{t("hub.h1.c")}</span>
+              </h1>
+              {/* Phones: award seal on the right, lined up with the middle line */}
+              <AwardBadge className="sm:hidden absolute right-0 top-1/2 -translate-y-1/2 w-24 z-10 drop-shadow-[0_8px_24px_rgba(0,0,0,0.55)]" />
+            </div>
 
             <div className="mt-10 grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
-              <p className="max-w-[14rem] sm:max-w-md self-start text-foreground/80 text-base sm:text-lg leading-relaxed bg-background/55 backdrop-blur-sm border border-border/60 p-5">
+              <p className="max-w-md self-start text-foreground/80 text-base sm:text-lg leading-relaxed bg-background/55 backdrop-blur-sm border border-border/60 p-5">
                 {t("hub.lede")}
               </p>
               <div className="flex flex-wrap gap-4">
