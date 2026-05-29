@@ -352,5 +352,11 @@ body {
 /* Black-and-red theming for embedded Google Maps (basic embeds can't be styled
    via the API, so we recolor the whole iframe with a filter chain). */
 .map-themed iframe {
-  filter: invert(1) sepia(1) saturate(10) hue-rotate(318deg) brightness(0.7) contrast(1.3);
+  /* Dark / night map: invert luminance then spin the hue back so water, roads
+     and land keep natural (muted) tones on a dark background — no red wash. */
+  filter: invert(0.95) hue-rotate(180deg) saturate(0.7) brightness(0.95);
 }
+
+/* Hide the scrollbar on horizontal chip rows (order category nav). */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

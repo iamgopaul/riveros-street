@@ -28,8 +28,9 @@ export default function HubHome() {
             <span className="watermark text-[26vw] leading-none">850</span>
           </div>
 
-          {/* Restaurant Guru award — floats in the clear top-right of the hero */}
-          <AwardBadge className="absolute right-5 top-24 sm:right-8 md:top-32 z-10 w-20 sm:w-28 md:w-36 drop-shadow-[0_8px_24px_rgba(0,0,0,0.55)]" />
+          {/* Restaurant Guru award — bottom-right on phones (clear of the nav),
+              top-right on larger screens. */}
+          <AwardBadge className="absolute z-10 drop-shadow-[0_8px_24px_rgba(0,0,0,0.55)] right-4 bottom-28 w-24 sm:right-8 sm:bottom-auto sm:top-28 sm:w-28 md:top-32 md:w-36" />
 
           <div className="relative max-w-7xl mx-auto px-6 w-full flex-1 flex flex-col justify-center py-16">
             <div className="tick inline-flex self-start text-[11px] uppercase tracking-[0.4em] text-foreground/70 mb-8 float-up bg-background/55 backdrop-blur-sm border border-border/60 px-4 py-2">
@@ -114,7 +115,7 @@ export default function HubHome() {
                 label={t("hub.detail.hours")}
                 value={HOURS.map(({ dayKey, time }) => `${t(`day.${dayKey}`)} · ${time}`)}
               />
-              <DetailRow label={t("hub.detail.order")} value={[PHONE_DISPLAY, `${hostOf(SITES.eat)}/order`]} last />
+              <DetailRow label={t("hub.detail.order")} value={[PHONE_DISPLAY, `${hostOf(SITES.eat)}/menu`]} last />
             </div>
           </div>
         </section>

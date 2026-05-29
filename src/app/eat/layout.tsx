@@ -1,5 +1,7 @@
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { CartProvider } from "@/lib/cart";
+import { CartDrawer } from "@/components/CartDrawer";
 
 export const metadata = {
   title: "Rivero's Street | Food Truck",
@@ -8,10 +10,11 @@ export const metadata = {
 
 export default function EatLayout({ children }: { children: React.ReactNode }) {
   return (
-    <>
+    <CartProvider>
       <Nav variant="eat" />
       <main className="flex-1">{children}</main>
       <Footer />
-    </>
+      <CartDrawer />
+    </CartProvider>
   );
 }

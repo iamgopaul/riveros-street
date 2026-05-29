@@ -12,41 +12,35 @@ export default function EatHome() {
   return (
     <>
       {/* ── HERO ───────────────────────────────────────── */}
-      <section className="relative overflow-hidden border-b border-border">
+      <section className="relative overflow-hidden border-b border-border flex flex-col min-h-[calc(100svh-7rem)]">
         <Palm className="absolute -left-12 bottom-0 w-52 h-auto text-accent-3/10" />
         <div className="absolute inset-0 flex items-center justify-center">
           <span className="watermark text-[24vw] leading-none">30</span>
         </div>
-        <div className="relative max-w-7xl mx-auto px-6 pt-28 pb-20">
-          <div className="tick text-[11px] uppercase tracking-[0.4em] text-foreground/60 mb-10 float-up">
+        <div className="relative max-w-7xl mx-auto px-6 w-full flex-1 flex flex-col justify-center py-12">
+          <div className="tick text-[11px] uppercase tracking-[0.4em] text-foreground/60 mb-8 float-up">
             <span className="font-mono text-accent">{t("eat.kitchen")}</span>
             <span>{t("eat.openLate")}</span>
           </div>
-          <h1 className="float-up font-mono font-bold uppercase tracking-tight text-[16vw] lg:text-[11rem] leading-[0.82]">
+          <h1 className="float-up font-mono font-bold uppercase tracking-tight text-[clamp(2.75rem,11vw,8.5rem)] leading-[0.82]">
             <span className="block">{t("eat.h1.a")}</span>
             <span className="block gold-text spray">{t("eat.h1.b")}</span>
             <span className="block stencil-outline">{t("eat.h1.c")}</span>
           </h1>
-          <div className="mt-12 grid gap-10 md:grid-cols-[1fr_auto] md:items-end">
+          <div className="mt-10 grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
             <p className="max-w-xl text-foreground/70 text-lg leading-relaxed">{t("eat.lede")}</p>
             <div className="flex flex-wrap gap-4">
               <Link
-                href="/find"
+                href="/menu"
                 className="group inline-flex items-center gap-3 px-8 h-14 bg-accent text-white font-mono uppercase tracking-widest text-sm hover:bg-accent-soft transition-colors"
               >
-                {t("eat.reserve")} <span className="transition-transform group-hover:translate-x-1">→</span>
+                {t("nav.orderNow")} <span className="transition-transform group-hover:translate-x-1">→</span>
               </Link>
               <Link
-                href="/menu"
+                href="/find"
                 className="inline-flex items-center gap-3 px-8 h-14 border border-foreground/25 font-mono uppercase tracking-widest text-sm hover:border-accent-2 hover:text-accent-2 transition-colors"
               >
-                {t("eat.menu")} →
-              </Link>
-              <Link
-                href="/order"
-                className="inline-flex items-center gap-3 px-8 h-14 border border-foreground/25 font-mono uppercase tracking-widest text-sm hover:border-accent-2 hover:text-accent-2 transition-colors"
-              >
-                {t("eat.order")} →
+                {t("eat.reserve")} →
               </Link>
             </div>
           </div>

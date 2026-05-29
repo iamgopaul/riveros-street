@@ -13,7 +13,7 @@ export default function ShopHome() {
   return (
     <>
       {/* ── HERO ───────────────────────────────────────── */}
-      <section className="relative overflow-hidden border-b border-border">
+      <section className="relative overflow-hidden border-b border-border flex flex-col min-h-[calc(100svh-7rem)]">
         {/* Hero background image with a scrim that fades into the page */}
         <div
           aria-hidden
@@ -25,17 +25,17 @@ export default function ShopHome() {
         <div className="absolute inset-0 flex items-center justify-end">
           <span className="watermark text-[26vw] leading-none pr-[2vw]">SS26</span>
         </div>
-        <div className="relative max-w-7xl mx-auto px-6 pt-28 pb-20">
-          <div className="tick inline-flex text-[11px] uppercase tracking-[0.4em] text-foreground/70 mb-10 float-up bg-background/55 backdrop-blur-sm border border-border/60 px-4 py-2">
+        <div className="relative max-w-7xl mx-auto px-6 w-full flex-1 flex flex-col justify-center py-12">
+          <div className="tick inline-flex self-start text-[11px] uppercase tracking-[0.4em] text-foreground/70 mb-8 float-up bg-background/55 backdrop-blur-sm border border-border/60 px-4 py-2">
             <span className="font-mono text-accent">{t("shop.ss26")}</span>
             <span>{t("shop.volume")}</span>
           </div>
-          <h1 className="float-up font-mono font-bold uppercase tracking-tight text-[14vw] lg:text-[10rem] leading-[0.82]">
+          <h1 className="float-up font-mono font-bold uppercase tracking-tight text-[clamp(2.75rem,11vw,8.5rem)] leading-[0.82]">
             <span className="block">{t("shop.h1.a")}</span>
             <span className="block stencil-outline">{t("shop.h1.b")}</span>
             <span className="block gold-text spray">{t("shop.h1.c")}</span>
           </h1>
-          <div className="mt-12 grid gap-10 md:grid-cols-[1fr_auto] md:items-end">
+          <div className="mt-10 grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
             <p className="max-w-md self-start text-foreground/80 text-lg leading-relaxed bg-background/55 backdrop-blur-sm border border-border/60 p-5">{t("shop.lede")}</p>
             <Link
               href="/products"

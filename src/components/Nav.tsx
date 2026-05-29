@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Logo } from "./Logo";
 import { LanguageToggle } from "./LanguageToggle";
+import { EatNavActions } from "./EatNavActions";
 import { useI18n } from "@/lib/i18n";
 import { SITES, withLang } from "@/lib/sites";
 
@@ -48,7 +49,6 @@ export function Nav({ variant, transparent = false }: { variant: Variant; transp
     eat: [
       { label: t("nav.menu"), href: "/menu" },
       { label: t("nav.reservations"), href: "/find" },
-      { label: t("nav.order"), href: "/order" },
     ],
     shop: [
       { label: t("nav.trending"), href: "/products?filter=trending" },
@@ -87,7 +87,10 @@ export function Nav({ variant, transparent = false }: { variant: Variant; transp
             </a>
           ))}
         </nav>
-        <LanguageToggle />
+        <div className="flex items-center gap-3 sm:gap-4">
+          {variant === "eat" && <EatNavActions />}
+          <LanguageToggle />
+        </div>
       </div>
 
       {/* ── MOBILE MAIN LINKS (every surface) ─────────── */}
@@ -120,7 +123,7 @@ export function Nav({ variant, transparent = false }: { variant: Variant; transp
                   href={l.href}
                   aria-current={active ? "page" : undefined}
                   className={`whitespace-nowrap transition-colors ${
-                    active ? "text-accent" : "text-foreground/60 hover:text-foreground"
+                    active ? "text-accent" : "text-foreground/60 hover:text-accent"
                   }`}
                 >
                   {l.label}
